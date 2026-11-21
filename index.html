@@ -66,7 +66,7 @@ const mk=(c,id)=>({id,async set(d){const n=c+'__'+id+'.json',e=cache[n],r=await 
 async function init(){const v=$('#v');
  if(!/^[0-9]+-[\w-]+\.apps\.googleusercontent\.com$/.test(CFG.clientId||'')){v.innerHTML='<section class="panel"><h2>Configuração pendente</h2><p>O <b>clientId</b> em <code>config.js</code> está vazio ou fora do formato esperado (<code>números-letras.apps.googleusercontent.com</code>). Confira o LEIA-ME.</p></section>';return}
  v.innerHTML='<section class="panel"><h2>Entrar</h2><p>Use uma conta Google com acesso à pasta <b>SAMTECH OS</b> no Drive.</p><div class="btns"><button onclick="login()">Entrar com Google</button></div></section>'}
-async function login(){try{await auth();ROOT=CFG.rootFolderId||await folder('SAMTECH OS','root');DATA=await folder('_dados',ROOT);
+async function login(){try{await auth();let rid=(String(CFG.rootFolderId||'').match(/[-\w]{25,}/)||[])[0];if(rid){try{await gj('files/'+rid+'?fields=id&supportsAllDrives=true')}catch(x){throw new Error('Pasta do rootFolderId não encontrada ou sem acesso. Confira o ID e o compartilhamento com sua conta.')}}ROOT=rid||await folder('SAMTECH OS','root');DATA=await folder('_dados',ROOT);
  assets={upload:async b=>({url:await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)})})};
  dbx={collection:c=>({doc:id=>mk(c,id||Math.random().toString(36).slice(2,9)+Date.now().toString(36)),onSnapshot:cb=>ls.push([c,cb])}),doc:p=>{const[c,id]=p.split('/');return mk(c,id)}};
  dbx.collection('clients').onSnapshot(s=>{C=s.docs.map(d=>({...d.data(),id:d.id}));soft()});
