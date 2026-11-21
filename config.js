@@ -1,5 +1,8 @@
-// Preencha com os dados do seu projeto no Google Cloud (veja o LEIA-ME.md)
+// Configuração do app SAMTECH · Gestão de OS
 window.SAMTECH_CFG = {
-  clientId: 174206905550-fit3h8lqv2inoshcpjcrlu3nqak6ff82.apps.googleusercontent.com,
-  rootFolderId: "1lfHaNjX-zwQBcsCt-VNYCVdkxDZ1sZf4" // opcional: ID da pasta "SAMTECH OS" compartilhada com a equipe
+  // 1) Cole aqui o "ID do cliente" OAuth (Google Cloud > Credenciais), termina em .apps.googleusercontent.com
+  clientId: "174206905550-fit3h8lqv2inoshcpjcrlu3nqak6ff82.apps.googleusercontent.com",
+
+  // 2) Pasta "SAMTECH OS" no Google Drive (já preenchida)
+  rootFolderId: "1lfHaNjX-zwQBcsCt-VNYCVdkxDZ1sZf4"
 };
